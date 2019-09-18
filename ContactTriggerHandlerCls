@@ -1,0 +1,48 @@
+/*
+* @TODO : Trigger Handler to Count Number Of Contact & show on Account Number Of Count Field
+* @Created On : 18/09/2019
+* @Created By : Deepak Tomar
+*/
+public class ContactTriggerHandler {
+    
+    // Method to count Contact in Insert, Update, Delete & Undelete Case
+    public static void CountContact(list<Contact> triggerNew,list<Contact> triggerOld){
+        Set<Id> setOfAccountId = new Set<Id>();//Set of Account Id
+        List<Account> listOfaccountUpdate = new List<Account>();//list Of Account to Update
+        //Check for Insert and Undelete Case
+        if(Trigger.IsInsert || Trigger.IsUndelete){
+            for(Contact c : triggerNew){
+                if(c.AccountId != null){   
+                    setOfAccountId.add(c.AccountId); 
+                }
+            }
+        }
+        //Check for Delete Case
+        if(Trigger.IsDelete && !triggerOld.isEmpty()){
+            FOR(Contact c : triggerOld){
+                if(c.AccountId!=null){   
+                    setOfAccountId.add(c.AccountId); 
+                }
+            }
+        }
+        if(!setOfAccountId.isEmpty()){
+            //Aggregate Result -> Count of contacts
+            for (AggregateResult ar : [SELECT AccountId AcctId, Count(id) ContactCount 
+                                       FROM Contact 
+                                       WHERE AccountId IN : setOfAccountId 
+                                       GROUP BY AccountId]){
+                                           Account a = new Account();
+                                           a.Id = (Id) ar.get('AcctId');
+                                           a.Number_of_Contacts__c = (Integer) ar.get('ContactCount');
+                                           listOfaccountUpdate.add(a);
+                                       }
+        }            
+        
+        //Try to update Account -> Number of Countacts Field
+        try{
+            update listOfaccountUpdate;
+        }catch(System.Exception e){
+            System.debug('Exception-->'+e);
+        }
+    }
+}
