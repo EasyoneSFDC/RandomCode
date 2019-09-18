@@ -1,0 +1,11 @@
+({
+	// Fetch the Recent Account list from the Apex controller
+    getRecentAccountlist: function(component) {
+        var action = component.get('c.getRecentAccounts');
+        action.setCallback(this, function(actionResult) {
+            console.log(actionResult.getReturnValue(actionResult));
+            component.set('v.recentAccountList', actionResult.getReturnValue());
+        });
+        $A.enqueueAction(action);
+    }
+})
