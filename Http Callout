@@ -1,0 +1,10 @@
+public class HTTPCallout {
+    public static void calloutMethod(){
+        http ht = new http();
+        httprequest hr = new httprequest();
+        hr.setEndpoint('https://postman-echo.com/get?foo1=bar1&foo2=bar2');
+        hr.setMethod('GET');
+        httpresponse htr = ht.send(hr);
+        system.debug('Response-->'+htr.getBody());
+    }
+}
