@@ -1,10 +1,19 @@
+/*
+ * @TODO : Basic HTTP Callout
+ * @Created On : 18/09/2019
+ * @Created By : Deepak Tomar
+*/
+
 public class HTTPCallout {
+
     public static void calloutMethod(){
+    
         http ht = new http();
         httprequest hr = new httprequest();
         hr.setEndpoint('https://postman-echo.com/get?foo1=bar1&foo2=bar2');
         hr.setMethod('GET');
         httpresponse htr = ht.send(hr);
-        system.debug('Response-->'+htr.getBody());
+        
+        system.debug('Response-->'+htr.getBody());//Getting the response in debug
     }
 }
