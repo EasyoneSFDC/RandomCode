@@ -1,0 +1,40 @@
+<aura:component controller="RecentAccountsCls" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:handler name="init" value="{!this}" action="{!c.recentAccountList}" />
+    <aura:attribute name="recentAccountList" type="List" />
+    <div class="slds-grid slds-p-around_medium">
+        <div class="slds-col">
+            <div class="slds-grid slds-p-around_medium slds-m-bottom_medium card">
+                <div class="slds-col">
+                    <lightning:icon iconName="action:record" size="xx-large" />
+                    <span style="font-weight:800;font-size:20px;">&nbsp;Recent Accounts</span>
+                </div>
+            </div>
+            <div class="slds-grid">
+                <div class="slds-col">
+                    <table class="slds-table slds-table_bordered slds-table_cell-buffer mytab slds-m-bottom_xx-large">
+                        <thead>
+                            <tr class="slds-text-heading_label">
+                                <th scope="col"><div class="slds-truncate" title="Account Name">Account Name</div></th>
+                                <th scope="col"><div class="slds-truncate" title="Account Number">Account Number</div></th>
+                                <th scope="col"><div class="slds-truncate" title="Phone Number">Phone Number</div></th>
+                                <th scope="col"><div class="slds-truncate" title="Account Type">Account Type</div></th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            <!-- Use the Apex model and controller to fetch server side data -->
+                            <aura:iteration items="{!v.recentAccountList}" var="ta">
+                                <tr>
+                                    <td><div class="slds-truncate" title="{!ta.Name}">{!ta.Name}</div></td>
+                                    <td><div class="slds-truncate" title="{!ta.AccountNumber}">{!ta.AccountNumber}</div></td>
+                                    <td><div class="slds-truncate" title="{!ta.Phone}">{!ta.Phone}</div></td>
+                                    <td><div class="slds-truncate" title="{!ta.Type}">{!ta.Type}</div></td>
+                                </tr>
+                            </aura:iteration>
+                        </tbody> 
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>
