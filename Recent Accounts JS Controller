@@ -1,0 +1,9 @@
+({
+	init: function (cmp, event, helper) {
+        helper.fetchData(cmp, event, helper);
+    },
+    recentAccountList: function(component, event, helper) {
+        // Fetch the recent Account list from the Apex controller
+        helper.getRecentAccountlist(component);
+    }
+})
