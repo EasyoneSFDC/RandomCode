@@ -1,0 +1,11 @@
+/*
+ * @TODO : Trigger to Count Number Of Contact & show on Account Number Of Count Field
+ * @Created On : 18/09/2019
+ * @Created By : Deepak Tomar
+*/
+
+trigger ContactTigger on Contact (After insert, After delete, After undelete) {
+    if(trigger.isAfter && (trigger.isInsert || trigger.isDelete || trigger.isUndelete)){
+        ContactTriggerHandler.CountContact(trigger.new, trigger.old);
+    }
+}
