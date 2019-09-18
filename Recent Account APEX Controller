@@ -1,0 +1,7 @@
+public class RecentAccountsCls {
+    @AuraEnabled
+    public static list<Account> getRecentAccounts(){
+        list<Account> listOfAccount = [SELECT Id,Name,AccountNumber,Phone,Type FROM ACCOUNT ORDER BY CREATEDDATE DESC LIMIT 10];
+        return listOfAccount;
+    }
+}

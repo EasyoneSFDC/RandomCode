@@ -1,0 +1,10 @@
+.THIS{
+    background : #fff;
+}
+.THIS .slds-form-element__label{
+    display: none;
+}
+.THIS .card{
+    box-shadow: 1px 2px 3px 1px #ccc;
+    border-radius: 4px;
+}
